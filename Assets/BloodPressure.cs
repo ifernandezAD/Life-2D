@@ -32,6 +32,7 @@ public class BloodPressure : MonoBehaviour
     private void Update()
     {
         UpdatePressureTest();
+        CheckBloodPressureStatus();
     }
 
     IEnumerator DecreasePressureOverTime()
@@ -46,6 +47,16 @@ public class BloodPressure : MonoBehaviour
     private void UpdatePressureTest()
     {
         pressureText.text = pressureLevel.ToString();
+    }
+
+    public void CheckBloodPressureStatus()
+    {
+        if (pressureLevel >= 100)
+        {
+            pressureLevel = 100;
+            GameManager.Instance.gameIsRunning = false;
+            Debug.Log("You're dead Game Over");
+        }
     }
 }
 
