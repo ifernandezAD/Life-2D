@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float checkDistance;
     [SerializeField] private bool isGrounded;
 
-
+    public int pressureAdded;
+    public int pressureSubstracted;
 
     private void Awake()
     {
@@ -53,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, checkDistance, whatIsGround))
         {
-            Debug.Log("is hitting ground");
             isGrounded = true;
         }
         else
@@ -66,5 +66,22 @@ public class PlayerController : MonoBehaviour
 
             myRigid.velocity = Vector3.up * jumpForce;
         }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "BloodCell")
+        {
+            BloodPressure.Instance.pressureLevel += pressureAdded;
+            Destroy(other.gameObject);
+        }
+        else if(other.gameObject.tag == "Enemy")
+        {
+            BloodPressure.Instance.pressureLevel -= pressureSubstracted;
+            Destroy(other.gameObject);
+        }
+
+
+
     }
 }
