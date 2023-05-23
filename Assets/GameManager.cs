@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public bool gameIsRunning;
 
     private void Awake()
-    {
+    {      
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -18,11 +18,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-    }
 
-    void Start()
-    {
         gameIsRunning = true;
     }
-
 }

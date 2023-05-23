@@ -26,14 +26,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        Flip();
-        Jump();
+        if (GameManager.Instance.gameIsRunning)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+            Flip();
+            Jump();
+        }
+     
     }
 
     private void FixedUpdate()
     {
-        myRigid.velocity = new Vector2(horizontal * speed * Time.fixedDeltaTime, myRigid.velocity.y);
+        if (GameManager.Instance.gameIsRunning)
+        {
+            myRigid.velocity = new Vector2(horizontal * speed * Time.fixedDeltaTime, myRigid.velocity.y);
+        }
+          
     }
 
     private void Flip()

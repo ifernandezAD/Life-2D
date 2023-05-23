@@ -1161,7 +1161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &845315174
 Transform:
   m_ObjectHideFlags: 0
@@ -1947,6 +1947,7 @@ MonoBehaviour:
   pressureText: {fileID: 1608213511}
   lowPressureCadence: 1
   pressureDecreaseRate: 1
+  playerController: {fileID: 0}
 --- !u!4 &1526624546
 Transform:
   m_ObjectHideFlags: 0

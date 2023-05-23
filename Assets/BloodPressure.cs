@@ -6,11 +6,13 @@ public class BloodPressure : MonoBehaviour
 {
     public static BloodPressure Instance;
 
-    public int pressureLevel = 50;
+    public float pressureLevel = 50;
     public TextMeshProUGUI pressureText;
 
     public int lowPressureCadence;
     public int pressureDecreaseRate;
+
+    [SerializeField] private PlayerController playerController;
 
     private void Awake()
     {
@@ -22,6 +24,8 @@ public class BloodPressure : MonoBehaviour
         {
             Instance = this;
         }
+
+        playerController = GameObject.FindGameObjectWithTag("Player").gameObject.GetComponent<PlayerController>();
     }
 
     private void Start()
@@ -37,6 +41,7 @@ public class BloodPressure : MonoBehaviour
 
     IEnumerator DecreasePressureOverTime()
     {
+        Debug.Log("Blood pressure corroutine is running");
         while (GameManager.Instance.gameIsRunning)
         {
             pressureLevel -= pressureDecreaseRate;
@@ -51,12 +56,36 @@ public class BloodPressure : MonoBehaviour
 
     public void CheckBloodPressureStatus()
     {
-        if (pressureLevel >= 100)
+        if (pressureLevel >= 100 && GameManager.Instance.gameIsRunning)
         {
             pressureLevel = 100;
             GameManager.Instance.gameIsRunning = false;
             Debug.Log("You're dead Game Over");
+        }else if (pressureLevel <= 0 && GameManager.Instance.gameIsRunning)
+        {
+            pressureLevel = 0;
+            GameManager.Instance.gameIsRunning = false;
+            Debug.Log("You're dead Game Over");
+        }else if (pressureLevel > 50 && pressureLevel < 100 && GameManager.Instance.gameIsRunning)
+        {
+            OnHighBloodPressure();
         }
+        else if (pressureLevel > 0 && pressureLevel < 50 && GameManager.Instance.gameIsRunning)
+        {
+            OnLowBloodPressure();
+        }
+    }
+
+    private void OnHighBloodPressure()
+    {
+        playerController.speed = playerController.speed * (pressureLevel / 10);
+        Debug.Log("Speed is" + playerController.speed);
+        Debug.Log("Caution High Blood Pressure");
+    }
+
+    private void OnLowBloodPressure()
+    {
+        Debug.Log("Caution Low Blood Pressure");
     }
 }
 
