@@ -7,11 +7,13 @@ public class PlayerController : MonoBehaviour
     //Move Variables
     private float horizontal;
     public float speed = 8f;
+    public float initialSpeed;
     private bool isFacingRight = true;
 
     //Jump Variables
 
     public float jumpForce;
+    public float initialJumpForce;
     public LayerMask whatIsGround;
     [SerializeField] private float checkDistance;
     [SerializeField] private bool isGrounded;
@@ -22,6 +24,12 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         myRigid = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        initialSpeed = speed;
+        initialJumpForce = jumpForce;
     }
 
     void Update()
