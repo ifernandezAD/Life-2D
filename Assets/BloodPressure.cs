@@ -99,7 +99,7 @@ public class BloodPressure : MonoBehaviour
 
 
         //Debug.Log("Speed is" + playerController.speed);
-        Debug.Log("Caution High Blood Pressure");
+        //Debug.Log("Caution High Blood Pressure");
     }
 
     private void OnLowBloodPressure()
@@ -114,7 +114,7 @@ public class BloodPressure : MonoBehaviour
         playerController.speed = playerController.initialSpeed * (modifierMultiplier / (100 - pressureLevel) );
         playerController.jumpForce = playerController.initialJumpForce * (modifierMultiplier / (100 - pressureLevel));
 
-        Debug.Log("Caution Low Blood Pressure");
+        //Debug.Log("Caution Low Blood Pressure");
     }
 }
 
