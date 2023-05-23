@@ -7,7 +7,7 @@ public class BloodPressure : MonoBehaviour
 {
     public static BloodPressure Instance;
 
-    public int pressureLevel = 50;
+    public float pressureLevel = 50;
     public TextMeshProUGUI pressureText;
 
     public int lowPressureCadence;
@@ -90,6 +90,8 @@ public class BloodPressure : MonoBehaviour
         highPressureVolume.enabled = true;
         lowPressureVolume.enabled = false;
 
+        highPressureVolume.weight = (pressureLevel - 50) / 50;
+
         //Movement
         playerController.speed = playerController.initialSpeed * (pressureLevel / modifierMultiplier);
         playerController.jumpForce = playerController.initialJumpForce * (pressureLevel / modifierMultiplier);
@@ -105,6 +107,8 @@ public class BloodPressure : MonoBehaviour
         //Postprocessing
         highPressureVolume.enabled = false;
         lowPressureVolume.enabled = true;
+
+        lowPressureVolume.weight = (50 - pressureLevel) / 50 ;
 
         //Movement
         playerController.speed = playerController.initialSpeed * (modifierMultiplier / (100 - pressureLevel) );
