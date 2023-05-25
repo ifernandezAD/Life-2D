@@ -96,7 +96,9 @@ public class BloodPressure : MonoBehaviour
         playerController.speed = playerController.initialSpeed * (pressureLevel / modifierMultiplier);
         playerController.jumpForce = playerController.initialJumpForce * (pressureLevel / modifierMultiplier);
 
-
+        //Shooting
+        playerController.sonicWaveCadence = playerController.initialSonicWaveCadence * (modifierMultiplier /pressureLevel);
+        playerController.sonicWaveSpeed = playerController.initialSonicWaveSpeed * (pressureLevel / modifierMultiplier);
 
         //Debug.Log("Speed is" + playerController.speed);
         //Debug.Log("Caution High Blood Pressure");
@@ -113,6 +115,11 @@ public class BloodPressure : MonoBehaviour
         //Movement
         playerController.speed = playerController.initialSpeed * (modifierMultiplier / (100 - pressureLevel) );
         playerController.jumpForce = playerController.initialJumpForce * (modifierMultiplier / (100 - pressureLevel));
+
+        //Shooting
+        playerController.sonicWaveSpeed = playerController.initialSonicWaveSpeed * (modifierMultiplier / (100 - pressureLevel));
+        playerController.sonicWaveCadence = playerController.initialSonicWaveCadence * (modifierMultiplier / pressureLevel);
+
 
         //Debug.Log("Caution Low Blood Pressure");
     }

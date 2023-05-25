@@ -3,7 +3,7 @@ using UnityEngine;
 public class SonicWaveMovement : MonoBehaviour
 {
     public float speed;
-    public float scale;
+    //public float scale;
     public Rigidbody myRigid;
 
     private void Awake()
@@ -13,7 +13,15 @@ public class SonicWaveMovement : MonoBehaviour
 
     private void Update()
     {
-        myRigid.AddForce(Vector3.right * speed * Time.deltaTime ,ForceMode.Impulse);
+        myRigid.velocity = transform.right * speed;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "BloodCell" || other.gameObject.tag == "Enemy")
+        {
+            Destroy(other.gameObject);
+        }
     }
 
 }

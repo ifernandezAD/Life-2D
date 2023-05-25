@@ -2420,9 +2420,10 @@ MonoBehaviour:
   isGrounded: 1
   sonicWavePrefab: {fileID: 975759698897009802, guid: febdc8a04b55b8143b8ee58ff429d9de,
     type: 3}
-  sonicWaveSpeed: 0
-  sonicWaveScale: 0
+  sonicWaveSpeed: 10
   sonicWaveCadence: 1
+  initialSonicWaveSpeed: 0
+  initialSonicWaveCadence: 0
   canShoot: 1
   shootOrigin: {fileID: 1081689499}
   pressureAdded: 5
@@ -2574,7 +2575,7 @@ MonoBehaviour:
   pressureLevel: 50
   pressureText: {fileID: 1608213511}
   lowPressureCadence: 1
-  pressureDecreaseRate: 1
+  pressureDecreaseRate: 2
   modifierMultiplier: 40
   playerController: {fileID: 0}
   highPressureVolume: {fileID: 832575518}

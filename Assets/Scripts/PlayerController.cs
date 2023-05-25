@@ -20,10 +20,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
 
     //ShootVariables
+
     public GameObject sonicWavePrefab;
     public float sonicWaveSpeed;
-    public float sonicWaveScale;
+    //public float sonicWaveScale;
     public float sonicWaveCadence;
+    public float initialSonicWaveSpeed;
+    //public float initialSonicWaveScale;
+    public float initialSonicWaveCadence;
+
+
     public bool canShoot;
     public Transform shootOrigin;
 
@@ -40,6 +46,10 @@ public class PlayerController : MonoBehaviour
     {
         initialSpeed = speed;
         initialJumpForce = jumpForce;
+        initialSonicWaveSpeed = sonicWaveSpeed;
+        initialSonicWaveCadence = sonicWaveCadence;
+
+        //initialSonicWaveScale = sonicWaveScale;
     }
 
     void Update()
@@ -68,9 +78,8 @@ public class PlayerController : MonoBehaviour
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
             isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+
+            transform.Rotate(0f, 180f, 0f);
         }
     }
 
@@ -99,7 +108,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && canShoot)
         {
-            GameObject sonicWaveClone = Instantiate(sonicWavePrefab, shootOrigin.position, transform.rotation);
+            GameObject sonicWaveClone = Instantiate(sonicWavePrefab, shootOrigin.position, shootOrigin.rotation);
+            sonicWaveClone.GetComponent<SonicWaveMovement>().speed = sonicWaveSpeed;
+            Destroy(sonicWaveClone, 5f);
             StartCoroutine(ShootCooldown());
         }
     }
