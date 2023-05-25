@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 0}
-  enemySpeed: 1
+  enemySpeed: 2
 --- !u!65 &4855172764557437426
 BoxCollider:
   m_ObjectHideFlags: 0
