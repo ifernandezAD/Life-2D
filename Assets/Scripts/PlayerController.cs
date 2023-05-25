@@ -117,12 +117,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "BloodCell")
+        if (other.gameObject.tag == "BloodCell" || other.gameObject.tag == "SmokeEnemy")
         {
             BloodPressure.Instance.pressureLevel += pressureAdded;
             Destroy(other.gameObject);
         }
-        else if(other.gameObject.tag == "Enemy")
+        else if(other.gameObject.tag == "MedsEnemy")
         {
             BloodPressure.Instance.pressureLevel -= pressureSubstracted;
             Destroy(other.gameObject);

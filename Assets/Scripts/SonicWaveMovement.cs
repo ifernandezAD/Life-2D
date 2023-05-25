@@ -18,7 +18,7 @@ public class SonicWaveMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "BloodCell" || other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "BloodCell" || other.gameObject.tag == "MedsEnemy" || other.gameObject.tag == "SmokeEnemy")
         {
             Destroy(other.gameObject);
         }
