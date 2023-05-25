@@ -9,6 +9,7 @@ TagManager:
   - SmokeEnemy
   - MedsEnemy
   - Alcohol
+  - SmokeArea
   layers:
   - Default
   - TransparentFX

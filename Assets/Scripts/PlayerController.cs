@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
 
     public int pressureAdded;
     public int pressureSubstracted;
+    public int smokePressureAdded;
+    public float smokeAreaCadence;
+    public bool inSmokeArea;
 
     private void Awake()
     {
@@ -48,7 +51,7 @@ public class PlayerController : MonoBehaviour
         initialJumpForce = jumpForce;
         initialSonicWaveSpeed = sonicWaveSpeed;
         initialSonicWaveCadence = sonicWaveCadence;
-
+        
         //initialSonicWaveScale = sonicWaveScale;
     }
 
@@ -136,6 +139,20 @@ public class PlayerController : MonoBehaviour
             Destroy(this.gameObject);
             GameManager.Instance.gameIsRunning = false;
         }
+        else if (other.gameObject.tag == "SmokeArea")
+        {
+            StartCoroutine(SmokeAreaDamage());
+            inSmokeArea = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "SmokeArea")
+        {
+            StopCoroutine(SmokeAreaDamage());
+            inSmokeArea = false;
+        }
     }
 
     public IEnumerator ShootCooldown()
@@ -144,6 +161,16 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(sonicWaveCadence);
         canShoot = true;
         //yield return null;
+    }
+
+    public IEnumerator SmokeAreaDamage()
+    {
+        while (inSmokeArea)
+        {
+            Debug.Log("Smoke Corroutine Initiated");
+            BloodPressure.Instance.pressureLevel += smokePressureAdded;
+            yield return new WaitForSeconds(smokeAreaCadence);
+        }       
     }
 
 
