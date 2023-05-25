@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -18,9 +19,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float checkDistance;
     [SerializeField] private bool isGrounded;
 
+    //ShootVariables
+    public GameObject sonicWavePrefab;
+    public float sonicWaveSpeed;
+    public float sonicWaveScale;
+    public float sonicWaveCadence;
+    public bool canShoot;
+    public Transform shootOrigin;
+
+
     public int pressureAdded;
     public int pressureSubstracted;
-
+    
     private void Awake()
     {
         myRigid = GetComponent<Rigidbody>();
@@ -39,6 +49,7 @@ public class PlayerController : MonoBehaviour
             horizontal = Input.GetAxisRaw("Horizontal");
             Flip();
             Jump();
+            Shoot();
         }
      
     }
@@ -77,10 +88,19 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
 
-        if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        if (isGrounded == true && Input.GetKeyDown(KeyCode.W))
         {
 
             myRigid.velocity = Vector3.up * jumpForce;
+        }
+    }
+
+    public void Shoot()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && canShoot)
+        {
+            GameObject sonicWaveClone = Instantiate(sonicWavePrefab, shootOrigin.position, transform.rotation);
+            StartCoroutine(ShootCooldown());
         }
     }
 
@@ -96,8 +116,15 @@ public class PlayerController : MonoBehaviour
             BloodPressure.Instance.pressureLevel -= pressureSubstracted;
             Destroy(other.gameObject);
         }
-
-
-
     }
+
+    public IEnumerator ShootCooldown()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(sonicWaveCadence);
+        canShoot = true;
+        //yield return null;
+    }
+
+    
 }
