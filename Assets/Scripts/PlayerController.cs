@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     public int pressureAdded;
     public int pressureSubstracted;
-    
+
     private void Awake()
     {
         myRigid = GetComponent<Rigidbody>();
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
             Jump();
             Shoot();
         }
-     
+
     }
 
     private void FixedUpdate()
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
         {
             myRigid.velocity = new Vector2(horizontal * speed * Time.fixedDeltaTime, myRigid.velocity.y);
         }
-          
+
     }
 
     private void Flip()
@@ -122,10 +122,19 @@ public class PlayerController : MonoBehaviour
             BloodPressure.Instance.pressureLevel += pressureAdded;
             Destroy(other.gameObject);
         }
-        else if(other.gameObject.tag == "MedsEnemy")
+        else if (other.gameObject.tag == "MedsEnemy")
         {
             BloodPressure.Instance.pressureLevel -= pressureSubstracted;
             Destroy(other.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Alcohol")
+        {
+            Destroy(this.gameObject);
+            GameManager.Instance.gameIsRunning = false;
         }
     }
 
@@ -137,5 +146,5 @@ public class PlayerController : MonoBehaviour
         //yield return null;
     }
 
-    
+
 }
