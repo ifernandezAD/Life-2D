@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         {
             GameObject sonicWaveClone = Instantiate(sonicWavePrefab, shootOrigin.position, shootOrigin.rotation);
             sonicWaveClone.GetComponent<SonicWaveMovement>().speed = sonicWaveSpeed;
-            Destroy(sonicWaveClone, 5f);
+            Destroy(sonicWaveClone, 3f);
             StartCoroutine(ShootCooldown());
         }
     }
