@@ -21,7 +21,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        Vector3 moveDirection = playerPosition.position - this.transform.position;
+        Vector3 moveDirection = (playerPosition.position - this.transform.position).normalized;
         transform.LookAt(playerPosition);
         myRigid.velocity = moveDirection * enemySpeed;
     }

@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosition: {fileID: 0}
-  enemySpeed: 0.1
+  enemySpeed: 1
 --- !u!1 &5810358183606510913
 GameObject:
   m_ObjectHideFlags: 0
